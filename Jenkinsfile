@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Construyendo la aplicación...'
-                sh 'dotnet build'
+                bat 'dotnet build'
             }
         }
         // stage('Test') {
