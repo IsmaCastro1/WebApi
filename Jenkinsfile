@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'Construyendo la aplicación...'
                 script {
-                    bat 'dotnet build'
+                    sh 'dotnet build'
                 }
             }
         }
