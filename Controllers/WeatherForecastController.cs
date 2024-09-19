@@ -21,7 +21,7 @@ namespace WebApi.Controllers
 		[HttpGet(Name = "GetWeatherForecast")]
 		public IEnumerable<WeatherForecast> Get()
 		{
-			Console.WriteLine("Hola2");
+			Console.WriteLine("Hola");
 
 			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
