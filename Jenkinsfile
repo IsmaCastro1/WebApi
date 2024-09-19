@@ -1,14 +1,14 @@
 pipeline {
     agent any
     tools {
-        msbuild 'MSBuild 2022'
+        msbuild 'sdk'
     }
     stages {
         stage('Build') {
             steps {
                 echo 'Construyendo la aplicación...'
                 script {
-                    bat 'msbuild right-first-time.sln /p:Configuration=Release %MSBUILD_ARGS%'
+                    bat 'dotnet build'
                 }
             }
         }
