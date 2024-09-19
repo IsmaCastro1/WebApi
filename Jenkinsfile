@@ -8,7 +8,11 @@ pipeline {
             steps {
                 echo 'Construyendo la aplicación...'
                 script {
-                    sh 'dotnet build'
+                    
+                    withEnv(['DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1']) {
+                        sh 'dotnet build'
+                    }
+                   
                 }
             }
         }
