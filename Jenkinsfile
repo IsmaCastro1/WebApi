@@ -16,13 +16,13 @@ pipeline {
                 }
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         echo 'Ejecutando pruebas...'
-        //         // Comando para ejecutar tus pruebas
-        //         sh 'mvn test' // Para ejecutar pruebas con Maven
-        //     }
-        // }
+         stage('Tests') {
+             steps {
+                 echo 'Ejecutando pruebas...'
+                 // Comando para ejecutar tus pruebas
+                 sh 'dotnet test' // Para ejecutar pruebas con Maven
+             }
+         }
         // stage('Deploy') {
         //     steps {
         //         echo 'Desplegando en la máquina virtual...'
