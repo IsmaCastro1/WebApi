@@ -28,7 +28,7 @@ pipeline {
              steps {
                  echo 'Desplegando en la máquina virtual...'
                  // Comando para desplegar tu aplicación
-                 sh 'ssh -i /home/clave.pem user@10.222.132.252 "cd /home/WebApi"'
+                 sh 'ssh -i /home/clave.pem user@10.222.132.252 "cd /home/"'
              }
          }
     }
