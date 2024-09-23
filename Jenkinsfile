@@ -27,8 +27,15 @@ pipeline {
         stage('Deploy') {
              steps {
                  echo 'Desplegando en la máquina virtual....'
-                 // Comando para desplegar tu aplicación
+
                  sh 'ssh -i /home/clave.pem user@10.222.132.252 "cd /home/user/WebApi && docker build -t api ."'
+                 
+                 try {
+                    sh "sudo docker rmi frontend-test"
+                 } catch (err) {
+                    echo err.getMessage()
+                    echo "Error detected, but we will continue."
+                 }
                  
                  sh 'ssh -i /home/clave.pem user@10.222.132.252 "docker build -t api ."docker stop api || true && docker rm api || true"'   
 
