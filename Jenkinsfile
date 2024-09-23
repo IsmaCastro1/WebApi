@@ -19,8 +19,9 @@ pipeline {
          stage('Tests') {
              steps {
                  echo 'Ejecutando pruebas...'
-                 // Comando para ejecutar tus pruebas
+                withEnv(['DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1']) {
                  sh 'dotnet test' // Para ejecutar pruebas con Maven
+                }
              }
          }
         // stage('Deploy') {
