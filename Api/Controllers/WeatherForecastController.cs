@@ -29,5 +29,11 @@ namespace Api.Controllers
 			})
 			.ToArray();
 		}
+
+  		[HttpGet(Name = "GetWeatherForecast")]
+		public string GetHello()
+		{
+			return "hello";
+		}
 	}
 }
