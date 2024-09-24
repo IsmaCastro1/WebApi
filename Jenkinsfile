@@ -32,9 +32,6 @@ pipeline {
              steps {
                  echo 'Copiando App'   
                  sh 'scp -i /home/${KEY} -r ./ user@${SERVER_IP}:/home/user/WebApi'
-
-                 echo 'Creando Imagen'  
-                 sh 'ssh -i /home/${KEY} user@${SERVER_IP} "cd /home/user/WebApi && docker build -t api ."'
                  
                  script {     
                      
@@ -56,6 +53,9 @@ pipeline {
                         echo "Error detected, but we will continue."
                     }          
                  }
+
+                 echo 'Creando Imagen'  
+                 sh 'ssh -i /home/${KEY} user@${SERVER_IP} "cd /home/user/WebApi && docker build -t api ."'
                  
                  sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker run -d --name api -p 0:8080 api:latest"'
              }
