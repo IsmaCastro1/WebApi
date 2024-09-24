@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SERVER_IP = '10.222.133.60' // Define la variable de entorno para la IP
-        KEY = 'id_ed25519'
+        SERVER_IP = '192.168.118.134' // Define la variable de entorno para la IP
+        KEY = 'id_rsa'
     }
     tools {
         dotnetsdk 'sdk'
