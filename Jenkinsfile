@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SERVER_IP = '192.168.118.134' // Define la variable de entorno para la IP
+        SERVER_IP = '10.222.133.60' // Define la variable de entorno para la IP
         KEY = 'id_rsa'
     }
     tools {
@@ -30,6 +30,16 @@ pipeline {
          }
         stage('Deploy') {
              steps {
+                 
+                 try 
+                 {
+                        echo 'Borrando app antigua...'
+                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "rm -rf /home/user/WebApi"' 
+                 } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                 }
+                 
                  echo 'Copiando App'   
                  sh 'scp -i /home/${KEY} -r ./ user@${SERVER_IP}:/home/user/WebApi'
                  
@@ -38,7 +48,7 @@ pipeline {
                     try {
                         echo 'Parando contenedor...'
                         sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker stop api"' 
-                         echo 'Borrando contenedor...'
+                        echo 'Borrando contenedor...'
                         sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker rm api"' 
                     } catch (err) {
                         echo err.getMessage()
