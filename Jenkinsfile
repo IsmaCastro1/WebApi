@@ -39,7 +39,7 @@ pipeline {
                  script {     
                      
                     try {
-                        echo 'parando contenedor...'
+                        echo 'Parando contenedor...'
                         sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker stop api"' 
                          echo 'Borrando contenedor...'
                         sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker rm api"' 
