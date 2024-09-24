@@ -67,7 +67,7 @@ pipeline {
                  echo 'Creando Imagen'  
                  sh 'ssh -i /home/${KEY} user@${SERVER_IP} "cd /home/user/WebApi && docker build -t api ."'
                  
-                 sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker run -d --name api -p 0:8080 api:latest"'
+                 sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker run -d --name api -p 80:8080 api:latest"'
              }
          }
     }
