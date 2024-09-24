@@ -26,7 +26,7 @@ pipeline {
          }
         stage('Deploy') {
              steps {
-                 echo 'Desplegando en la máquina virtual....'
+                 echo 'Desplegando en la máquina virtual...'
 
                  sh 'ssh -i /home/clave.pem user@10.222.132.252 "cd /home/user/WebApi && docker build -t api ."'
                  
