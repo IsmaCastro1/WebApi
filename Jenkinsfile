@@ -39,7 +39,7 @@ pipeline {
                     }
                  }
                  
-                 sh 'ssh -i /home/clave.pem user@10.222.132.252 "docker run -d --name mi-api -p 80:80 api:latest"'
+                 sh 'ssh -i /home/clave.pem user@10.222.132.252 "docker run -d --name api -p 80:80 api:latest"'
              }
          }
     }
