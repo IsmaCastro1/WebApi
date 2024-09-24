@@ -30,19 +30,31 @@ pipeline {
          }
         stage('Deploy') {
              steps {
-                 echo 'Desplegando en la máquina virtual...'
-
+                 echo 'Copiando App'   
                  sh 'scp -i /home/${KEY} -r ./ user@${SERVER_IP}:/home/user/WebApi'
 
+                 echo 'Creando Imagen'  
                  sh 'ssh -i /home/${KEY} user@${SERVER_IP} "cd /home/user/WebApi && docker build -t api ."'
                  
-                 script {
+                 script {     
+                     
                     try {
-                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker build -t api ."docker stop api || true && docker rm api || true"' 
+                        echo 'parando contenedor...'
+                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker stop api"' 
+                         echo 'Borrando contenedor...'
+                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker rm api"' 
                     } catch (err) {
                         echo err.getMessage()
                         echo "Error detected, but we will continue."
                     }
+
+                    try {
+                        echo 'Borrando imagen...'
+                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker rmi api"' 
+                    } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                    }          
                  }
                  
                  sh 'ssh -i /home/${KEY} user@${SERVER_IP} "docker run -d --name api -p 0:8080 api:latest"'
