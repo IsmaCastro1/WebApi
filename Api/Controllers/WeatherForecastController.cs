@@ -30,7 +30,7 @@ namespace Api.Controllers
 			.ToArray();
 		}
 
-  		[HttpGet(Name = "hello")]
+  		[HttpGet("hello")]
 		public string GetHello()
 		{
 			return "hello";
