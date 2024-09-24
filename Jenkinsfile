@@ -30,16 +30,16 @@ pipeline {
          }
         stage('Deploy') {
              steps {
-                 
-                 try 
-                 {
-                        echo 'Borrando app antigua...'
-                        sh 'ssh -i /home/${KEY} user@${SERVER_IP} "rm -rf /home/user/WebApi"' 
-                 } catch (err) {
-                        echo err.getMessage()
-                        echo "Error detected, but we will continue."
+                 script {     
+                     try 
+                     {
+                            echo 'Borrando app antigua...'
+                            sh 'ssh -i /home/${KEY} user@${SERVER_IP} "rm -rf /home/user/WebApi"' 
+                     } catch (err) {
+                            echo err.getMessage()
+                            echo "Error detected, but we will continue."
+                     }
                  }
-                 
                  echo 'Copiando App'   
                  sh 'scp -i /home/${KEY} -r ./ user@${SERVER_IP}:/home/user/WebApi'
                  
